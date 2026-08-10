@@ -2,40 +2,55 @@
 
 Приватный хаб скиллов команды DWH для Hermes Agent.
 
-## Установка
-
-```bash
-# Добавить как tap (источник скиллов)
-hermes skills tap add artem-gromov/dwh-team-skills
-
-# Установить конкретный скилл
-hermes skills install artem-gromov/dwh-team-skills/switch-chatgpt-credential
-```
-
 ## Структура
 
 ```
-<skill-name>/
-  SKILL.md          # Обязательный — YAML frontmatter + markdown
-  references/       # Справочные материалы (опционально)
-  scripts/          # Скрипты (опционально)
-  templates/        # Шаблоны (опционально)
+skills/
+  dwh-team/                        # Процессы и workflows команды
+    switch-chatgpt-credential/     # Переключение ChatGPT OAuth аккаунтов
+      SKILL.md
+  integrations/                    # Инструменты и интеграции
+    (clickhouse/                   # Пример: сюда кладём скиллы инструментов)
+    (gitlab/)
+    (jira/)
+    (grafana/)
+    (airflow/)
+```
+
+## Установка
+
+```bash
+# Один раз добавить tap
+hermes skills tap add artem-gromov/dwh-team-skills
+
+# Установить скилл команды (категория dwh-team)
+hermes skills install artem-gromov/dwh-team-skills/dwh-team/switch-chatgpt-credential
+
+# Установить интеграцию (категория integrations)
+# hermes skills install artem-gromov/dwh-team-skills/integrations/clickhouse
 ```
 
 ## Добавление нового скилла
 
-1. Создай директорию `<skill-name>/`
-2. Положи внутрь `SKILL.md` с frontmatter:
+1. Выбери категорию: `dwh-team/` для процессов команды, `integrations/` для инструментов
+2. Создай директорию `<category>/<skill-name>/`
+3. Положи внутрь `SKILL.md` с frontmatter:
    ```yaml
    ---
    name: my-skill
    description: "Краткое описание"
    ---
    ```
-3. Закоммить и запушь — участники команды смогут установить через `hermes skills install`
+4. Закоммить и запушь
 
 ## Скиллы
 
+### dwh-team — Процессы команды
 | Скилл | Описание |
 |---|---|
 | switch-chatgpt-credential | Переключение ChatGPT OAuth аккаунтов |
+
+### integrations — Инструменты
+| Скилл | Описание |
+|---|---|
+| _(пусто)_ | Сюда добавляем clickhouse, gitlab, jira и т.д. |
