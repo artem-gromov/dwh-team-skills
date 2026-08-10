@@ -24,13 +24,16 @@ skills/
 hermes skills tap add artem-gromov/dwh-team-skills
 
 # Установить скилл команды (категория dwh-team)
-hermes skills install artem-gromov/dwh-team-skills/dwh-team/switch-chatgpt-credential --category dwh-team
+hermes skills install artem-gromov/dwh-team-skills/dwh-team/switch-chatgpt-credential --category dwh-team --yes
 
 # Установить интеграцию (категория integrations)
-# hermes skills install artem-gromov/dwh-team-skills/integrations/clickhouse --category integrations
+# hermes skills install artem-gromov/dwh-team-skills/integrations/clickhouse --category integrations --yes
 ```
 
-> **Важно:** флаг `--category` обязателен — без него скилл установится в корень `~/.hermes/skills/` без категории. Путь в репо (`dwh-team/...`) не маппится автоматически на локальную категорию.
+> **⚠️ Флаг `--category` обязателен.**
+> Hermes автоматически определяет категорию из пути репо только для official-скиллов (Nous Research). Для community-источников (tap, skills.sh, ClawHub) категория НЕ извлекается автоматически — без `--category` скилл установится в корень `~/.hermes/skills/` без категории.
+>
+> Структура папок в репо (`dwh-team/`, `integrations/`) нужна для организации репо и навигации, но не влияет на локальную установку.
 
 ## Замена локально установленных скиллов на hub-версию
 
@@ -113,6 +116,7 @@ hermes skills inspect artem-gromov/dwh-team-skills/<category>/<skill-name>
    ---
    ```
 4. Закоммить и запушь
+5. Установи: `hermes skills install artem-gromov/dwh-team-skills/<category>/<skill-name> --category <category> --yes`
 
 ## Скиллы
 
